@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Heaven | Birthday & Name Cards</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #fff7fb;
+      color: #333;
+    }
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #ff5c9a, #9b59ff);
+      color: white;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+    .logo {
+      font-size: 27px;
+      font-weight: bold;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      opacity: 0.8;
+    }
+    /* HERO */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 8%;
+      background: linear-gradient(135deg, #fff0f7, #f2eaff);
+    }
+    .hero-text {
+      max-width: 550px;
+    }
+    .hero h1 {
+      font-size: 55px;
+      color: #9b3d8e;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      color: #ff4f91;
+    }
+    .hero p {
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      background: #ff4f91;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+    }
+    .btn:hover {
+      background: #d93676;
+      transform: translateY(-2px);
+    }
+    /* HERO CARD */
+    .hero-card {
+      width: 320px;
+      height: 390px;
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      transform: rotate(4deg);
+      border: 8px solid #ffd3e5;
+    }
+    .hero-card h2 {
+      font-size: 40px;
+      color: #ff4f91;
+    }
+    .hero-card p {
+      margin-top: 15px;
+      color: #777;
+    }
+    /* SECTIONS */
+    section {
+      padding: 70px 8%;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+    .section-title h2 {
+      font-size: 38px;
+      color: #9b3d8e;
+    }
+    .section-title p {
+      margin-top: 10px;
+      color: #777;
+    }
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+    }
+    .card-design {
+      height: 230px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-design::before {
+      content: "🎈 ✨ 🎂 ✨ 🎈";
+      position: absolute;
+      top: 15px;
+      font-size: 22px;
+      opacity: 0.9;
+    }
+    .card-design::after {
+      content: "🎁 💖 🎉 💖 🎁";
+      position: absolute;
+      bottom: 15px;
+      font-size: 20px;
+    }
+    .pink { background: linear-gradient(135deg, #ff9bc4, #ff4f91); }
+    .purple { background: linear-gradient(135deg, #c9a7ff, #7d4cff); }
+    .blue { background: linear-gradient(135deg, #8edcff, #4285ff); }
+    .gold { background: linear-gradient(135deg, #ffe58a, #ffb52e); }
+    .green { background: linear-gradient(135deg, #a7f5ce, #40c98b); }
+    .card-design h3 {
+      color: white;
+      font-size: 30px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .card-info {
+      padding: 20px;
+    }
+    .card-info h3 {
+      color: #9b3d8e;
+      margin-bottom: 8px;
+    }
+    .card-info p {
+      color: #777;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff4f91;
+      margin-bottom: 15px;
+    }
+    .card-info .btn {
+      width: 100%;
+    }
+    /* ABOUT */
+    .about {
+      background: white;
+      text-align: center;
+    }
+    .about-content {
+      max-width: 750px;
+      margin: auto;
+      line-height: 1.8;
+      color: #666;
+      font-size: 18px;
+    }
+    /* ORDER CTA */
+    .order {
+      background: linear-gradient(135deg, #9b59ff, #ff5c9a);
+      color: white;
+      text-align: center;
+    }
+    .order h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+    .order p {
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+    .order .btn {
+      background: white;
+      color: #9b3d8e;
+    }
+    /* ORDER FORM */
+    .order-form-section {
+      background: #fff0f7;
+    }
+    .order-box {
+      max-width: 650px;
+      margin: auto;
+      background: white;
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+    }
+    .order-box h3 {
+      text-align: center;
+      color: #9b3d8e;
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 7px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: #ff4f91;
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .total-box {
+      background: #fff0f7;
+      padding: 18px;
+      border-radius: 12px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .total-box span {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff4f91;
+    }
+    .whatsapp-btn {
+      width: 100%;
+      background: #25D366;
+      font-size: 17px;
+    }
+    .whatsapp-btn:hover {
+      background: #1da851;
+    }
+    /* CONTACT */
+    .contact {
+      text-align: center;
+      background: #fff7fb;
+    }
+    .contact p {
+      margin: 15px;
+      font-size: 18px;
+    }
+    .contact a {
+      color: #ff4f91;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .contact a:hover {
+      text-decoration: underline;
+    }
+    /* FOOTER */
+    footer {
+      background: #2c1933;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+    /* MOBILE */
+    @media (max-width: 800px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      nav a {
+        margin: 0 7px;
+        font-size: 14px;
+      }
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+      }
+      .hero h1 {
+        font-size: 40px;
+      }
+      .hero-card {
+        width: 280px;
+        height: 340px;
+      }
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .section-title h2 {
+        font-size: 30px;
+      }
+      .order-box {
+        padding: 25px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">💌 Card Heaven</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#cards">Cards</a>
+      <a href="#about">About</a>
+      <a href="#order">Order</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Make Every Moment <span>Special</span> 🎂</h1>
+      <p>Welcome to Card Heaven — your place for beautiful, creative and personalized birthday cards and name cards.</p>
+      <a href="#cards" class="btn">Explore Cards</a>
+    </div>
+    <div class="hero-card">
+      <div>
+        <h2>🎂<br>Happy Birthday!</h2>
+        <p>Made specially with love by Card Heaven. 💖</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section id="cards">
+    <div class="section-title">
+      <h2>Our Beautiful Cards</h2>
+      <p>Choose your favorite design and make it personal.</p>
+    </div>
+
+    <div class="cards">
+      <!-- CARD 1 -->
+      <div class="card">
+        <div class="card-design pink">
+          <h3>🎂 Birthday<br>Celebration</h3>
+        </div>
+        <div class="card-info">
+          <h3>Birthday Card</h3>
+          <p>Perfect for your friends and family.</p>
+          <div class="price">Rs. 1,000</div>
+          <button class="btn" onclick="selectCard('Birthday Card')">Order Now</button>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="card">
+        <div class="card-design purple">
+          <h3>✨ Happy<br>Birthday</h3>
+        </div>
+        <div class="card-info">
+          <h3>Premium Birthday</h3>
+          <p>A stylish card for someone special.</p>
+          <div class="price">Rs. 1,000</div>
+          <button class="btn" onclick="selectCard('Premium Birthday Card')">Order Now</button>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="card">
+        <div class="card-design blue">
+          <h3>💙 For<br>You</h3>
+        </div>
+        <div class="card-info">
+          <h3>Personalized Card</h3>
+          <p>Add a special name and message.</p>
+          <div class="price">Rs. 1,000</div>
+          <button class="btn" onclick="selectCard('Personalized Card')">Order Now</button>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="card">
+        <div class="card-design gold">
+          <h3>⭐ Special<br>Day</h3>
+        </div>
+        <div class="card-info">
+          <h3>Golden Card</h3>
+          <p>A premium design for special occasions.</p>
+          <div class="price">Rs. 1,000</div>
+          <button class="btn" onclick="selectCard('Golden Card')">Order Now</button>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="card">
+        <div class="card-design green">
+          <h3>🌸 Best<br>Wishes</h3>
+        </div>
+        <div class="card-info">
+          <h3>Best Wishes Card</h3>
+          <p>Send beautiful wishes to someone special.</p>
+          <div class="price">Rs. 1,000</div>
+          <button class="btn" onclick="selectCard('Best Wishes Card')">Order Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-title">
+      <h2>About Card Heaven</h2>
+    </div>
+    <div class="about-content">
+      <p>Card Heaven is a creative card business making beautiful birthday cards, personalized name cards and special occasion cards. Every card is designed to make your special moments even more memorable. 💖</p>
+    </div>
+  </section>
+
+  <!-- ORDER CTA -->
+  <section class="order" id="order">
+    <h2>Ready to Create Your Card? 💖</h2>
+    <p>Choose a design and place your order directly through WhatsApp.</p>
+    <a href="#order-form" class="btn">Create My Card</a>
+  </section>
+
+  <!-- ORDER FORM -->
+  <section class="order-form-section" id="order-form">
+    <div class="section-title">
+      <h2>Place Your Order 🛍️</h2>
+      <p>Fill in your details and send your order directly to Card Heaven.</p>
+    </div>
+
+    <div class="order-box">
+      <h3>🎁 Order Details</h3>
+
+      <!-- Form configured for Netlify Forms -->
+      <form name="orders" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="orders" />
+
+        <div class="form-group">
+          <label for="customerName">Your Name</label>
+          <input type="text" id="customerName" name="customerName" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="customerPhone">Your Phone Number</label>
+          <input type="tel" id="customerPhone" name="customerPhone" placeholder="0302-1113233" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cardSelect">Select Your Card</label>
+          <select id="cardSelect" name="cardSelect" onchange="calculateTotal()">
+            <option value="Birthday Card">Birthday Card</option>
+            <option value="Premium Birthday Card">Premium Birthday Card</option>
+            <option value="Personalized Card">Personalized Card</option>
+            <option value="Golden Card">Golden Card</option>
+            <option value="Best Wishes Card">Best Wishes Card</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" onchange="calculateTotal()" oninput="calculateTotal()">
+        </div>
+
+        <div class="form-group">
+          <label for="cardMessage">Personal Message</label>
+          <textarea id="cardMessage" name="cardMessage" placeholder="Write the name and message you want on the card..."></textarea>
+        </div>
+
+        <div class="total-box">
+          <p>Total Price</p>
+          Rs. <span id="totalPrice">1,000</span>
+        </div>
+
+        <button type="button" class="btn whatsapp-btn" onclick="sendOrder()">
+          💬 Send Order on WhatsApp
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-title">
+      <h2>Contact Card Heaven</h2>
+      <p>Place your order or ask us about custom designs.</p>
+    </div>
+
+    <p>
+      📱 WhatsApp:
+      <a href="https://wa.me/923021113233" target="_blank">0302-1113233</a>
+    </p>
+
+    <p>
+      📸 Instagram:
+      <a href="https://www.instagram.com/The_CardHeaven/" target="_blank">@The_CardHeaven</a>
+    </p>
+
+    <p>
+      📧 Email:
+      <strong>cardheaven@example.com</strong>
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Card Heaven. All Rights Reserved.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const PRICE_PER_CARD = 1000;
+
+    function selectCard(cardName) {
+      document.getElementById("cardSelect").value = cardName;
+      document.getElementById("order-form").scrollIntoView({ behavior: "smooth" });
+      calculateTotal();
+    }
+
+    function calculateTotal() {
+      let quantity = parseInt(document.getElementById("quantity").value) || 1;
+      if (quantity < 1) {
+        quantity = 1;
+        document.getElementById("quantity").value = 1;
+      }
+      const total = PRICE_PER_CARD * quantity;
+      document.getElementById("totalPrice").textContent = total.toLocaleString();
+    }
+
+    function sendOrder() {
+      const name = document.getElementById("customerName").value.trim();
+      const phone = document.getElementById("customerPhone").value.trim();
+      const card = document.getElementById("cardSelect").value;
+      const quantity = parseInt(document.getElementById("quantity").value) || 1;
+      const message = document.getElementById("cardMessage").value.trim();
+
+      if (!name) {
+        alert("Please enter your name. 😊");
+        return;
+      }
+
+      if (!phone) {
+        alert("Please enter your phone number. 📱");
+        return;
+      }
+
+      if (quantity < 1) {
+        alert("Please enter a valid quantity.");
+        return;
+      }
+
+      const total = PRICE_PER_CARD * quantity;
+
+      const whatsappMessage = `🎀 *CARD HEAVEN ORDER* 🎀\n\n👤 *Customer Name:* ${name}\n📱 *Phone:* ${phone}\n🎁 *Card:* ${card}\n🔢 *Quantity:* ${quantity}\n💰 *Total:* Rs. ${total.toLocaleString()}\n💌 *Personal Message:* ${message || "No special message"}\n\nThank you for choosing Card Heaven! 💖`;
+
+      const whatsappURL = "https://wa.me/923021113233?text=" + encodeURIComponent(whatsappMessage);
+      window.open(whatsappURL, "_blank");
+    }
+  </script>
+</body>
+</html>
